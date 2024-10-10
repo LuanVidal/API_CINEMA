@@ -1,0 +1,215 @@
+openapi: 3.0.0
+info:
+  title: Luan Gabriel Vidal - 323125685 - API de Cinema
+  description: API para gerenciamento de cinemas e filmes
+  version: 1.0.0
+paths:
+  /cinemas:
+    get:
+      summary: Lista todos os cinemas
+      responses:
+        '200':
+          description: Lista de cinemas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cinema'
+    post:
+      summary: Adiciona um novo cinema
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cinema'
+      responses:
+        '201':
+          description: Cinema criado
+  /cinemas/{cinemaId}:
+    get:
+      summary: Exibe detalhes de um cinema
+      parameters:
+        - in: path
+          name: cinemaId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalhes do cinema
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cinema'
+    put:
+      summary: Atualiza um cinema
+      parameters:
+        - in: path
+          name: cinemaId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cinema'
+      responses:
+        '200':
+          description: Cinema atualizado
+    delete:
+      summary: Exclui um cinema
+      parameters:
+        - in: path
+          name: cinemaId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Cinema excluído
+  /filmes:
+    get:
+      summary: Lista todos os filmes
+      responses:
+        '200':
+          description: Lista de filmes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Filme'
+              examples:
+                filme1:
+                  summary: O Senhor dos Anéis
+                  value:
+                    filmeId: 1
+                    nome: O Senhor dos Anéis
+                    genero: Aventura
+                    ano: 2001
+                    cinemaId: 1
+                filme2:
+                  summary: Matrix
+                  value:
+                    filmeId: 2
+                    nome: Matrix
+                    genero: Ficção Científica
+                    ano: 1999
+                    cinemaId: 1
+                filme3:
+                  summary: Star Wars
+                  value:
+                    filmeId: 3
+                    nome: Star Wars
+                    genero: Ficção Científica
+                    ano: 1977
+                    cinemaId: 1
+                filme4:
+                  summary: Titanic
+                  value:
+                    filmeId: 4
+                    nome: Titanic
+                    genero: Romance
+                    ano: 1997
+                    cinemaId: 1
+                filme5:
+                  summary: Harry Potter
+                  value:
+                    filmeId: 5
+                    nome: Harry Potter
+                    genero: Fantasia
+                    ano: 2001
+                    cinemaId: 1
+    post:
+      summary: Adiciona um novo filme
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Filme'
+      responses:
+        '201':
+          description: Filme criado
+  /filmes/{filmeId}:
+    get:
+      summary: Exibe detalhes de um filme
+      parameters:
+        - in: path
+          name: filmeId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalhes do filme
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Filme'
+    put:
+      summary: Atualiza um filme
+      parameters:
+        - in: path
+          name: filmeId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Filme'
+      responses:
+        '200':
+          description: Filme atualizado
+    delete:
+      summary: Exclui um filme
+      parameters:
+        - in: path
+          name: filmeId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Filme excluído
+
+components:
+  schemas:
+    Cinema:
+      type: object
+      properties:
+        cinemaId:
+          type: integer
+          example: 1
+        nome:
+          type: string
+          nullable: true
+          example: Cinema Central
+        cnpj:
+          type: string
+          nullable: true
+          example: 12.345.678/0001-99
+    Filme:
+      type: object
+      properties:
+        filmeId:
+          type: integer
+          example: 1
+        nome:
+          type: string
+          nullable: true
+          example: O Senhor dos Anéis
+        genero:
+          type: string
+          nullable: true
+          example: Aventura
+        ano:
+          type: integer
+          nullable: true
+          example: 2001
+        cinemaId:
+          type: integer
+          example: 1
